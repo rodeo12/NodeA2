@@ -5,7 +5,7 @@ const saltRounds = 10;
 
 
 const usersController = {
-
+    //Create User
     createUser: async (req, res) => {
         try {
             const { email, password } = req.body;
@@ -17,7 +17,7 @@ const usersController = {
             res.status(500).json({ error: err.message });
         }
     },
-
+    //Get All Users
     getUsers: async (req, res) => {
         const { page = 1, limit = 10 } = req.query;
         const skip = (page - 1) * limit;
@@ -31,6 +31,26 @@ const usersController = {
         }
     },
 
+      // Analytics endpoint
+      getUserAnalytics: async (req, res) => {
+        try {
+            const analyticsData = await User.aggregate([
+                {
+                    $group: {
+                        _id: { $month: '$createdAt' }, // Extract month from createdAt field
+                        count: { $sum: 1 }, // Count users in each month
+                    },
+                },
+            ]);
+
+            res.status(200).json(analyticsData);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    },
+
+    //Get User By Id
     getUserById: async (req, res) => {
         const { id } = req.params;
 

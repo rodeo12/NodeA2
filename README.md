@@ -1,1 +1,2 @@
 # Extend the User API to include middleware for logging requests and authenticating users via JWT tokens. Add pagination to the list users endpoint.
+# Develop an analytics endpoint for the User API that uses MongoDB aggregation to provide insights (e.g., count of users created each month).

@@ -1,1 +1,1 @@
-# NodeA2
+# Extend the User API to include middleware for logging requests and authenticating users via JWT tokens. Add pagination to the list users endpoint.

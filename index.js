@@ -1,6 +1,7 @@
 const express= require("express");
 const mongoose= require("mongoose");
 const loggerMiddleware = require('./middleware/loggerMiddleware');
+const authMiddleware = require('./middleware/authMiddleware');
 const usersRouter = require('./routes/user');
 require("dotenv").config();
 
@@ -10,6 +11,7 @@ const PORT= process.env.PORT ;
 
 app.use(express.json());
 app.use(loggerMiddleware);
+app.use(authMiddleware);
 
 app.use('/api/users', usersRouter);
 
